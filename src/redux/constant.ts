@@ -1,0 +1,15 @@
+export const REGISTER_NEW_USER = "REGISTER_NEW_USER";
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_FAIL = "REGISTER_FAIL";
+export const registerAPI = "http://localhost:8085/add/addUser";
+export const LOGIN_USER = "LOGIN_USER";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAIL = "LOGIN_FAIL";
+export const login = "http://localhost:8085/login/loginUser";
+export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
+export const LOGOUT_USER = "LOGOUT_USER";
+export const GET_USER_DATA = "GET_USER_DATA";
+export const GET_USER_DATA_FAILURE = "GET_USER_DATA_FAILURE";
+export const GET_USER_DATA_SUCCESS = "GET_USER_DATA_SUCCESS";
