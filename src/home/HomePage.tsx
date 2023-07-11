@@ -1,8 +1,11 @@
 import Logout from "@app/logout/logout";
 import React, { useState, useEffect } from "react";
 import "./homePageStyle.css";
-import Cart from "./Cart";
+
 import { useSelector } from "react-redux";
+import { allRoutes } from "@app/constant/path";
+import Cart from "@app/commonComp/Cart";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const userDetail = useSelector((state: any) => state.getUserDetailsReducer);
@@ -21,7 +24,8 @@ const HomePage = () => {
       <p>email: {details.email}</p>
       <p>Mobile {details.mobile}</p>
       <Logout />
-      <Cart />
+      <Cart heading={"Free Test Series "} link={allRoutes.freeTest} />
+      {/* <Link to={allRoutes.freeTest}>Free Test Series</Link> */}
     </>
   );
 };

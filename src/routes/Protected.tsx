@@ -1,14 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { LOGIN_FAIL, LOGIN_SUCCESS } from "@app/redux/constant";
-function Protected({ children }) {
-  let loginResponse = useSelector((state: any) => state.loginUserReducer);
-  console.log("loginResponse user route", loginResponse);
-  if (loginResponse.isLoggedIn) {
-    return children;
+import { LOGIN_SUCCESS } from "@app/redux/constant";
+
+import { Outlet, Navigate } from "react-router-dom";
+import { allRoutes } from "@app/constant/path";
+
+const ProtectedRoute = () => {
+  const isLoggedIn = useSelector(
+    (state: any) => state.loginUserReducer.isLoggedIn
+  );
+  console.log("@line 12", isLoggedIn);
+
+  if (isLoggedIn) {
+    return <Outlet />;
+  } else {
+    return <Navigate to={allRoutes.login} replace />;
   }
-  console.warn("Login response fail", loginResponse.isLoggedIn);
-  return <>Error page</>;
-}
-export default Protected;
+};
+
+export default ProtectedRoute;

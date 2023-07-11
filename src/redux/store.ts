@@ -6,11 +6,17 @@ import rootReducer from "./rootReducer";
 import registerUserSaga from "@app/register/sagaRegister";
 import loginUser from "@app/login/loginSaga";
 import authSaga from "@app/logout/logoutSaga";
+import testSaga from "@app/testPage/testSaga";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["loginUserReducer", "getUserDetailsReducer"], // Specify the reducer(s) to persist
+  whitelist: [
+    "loginUserReducer",
+    "getUserDetailsReducer",
+    "questionsReducer",
+    "testPageReducer",
+  ], // Specify the reducer(s) to persist
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -28,5 +34,6 @@ const persistor = persistStore(store);
 sagaMiddleware.run(registerUserSaga);
 sagaMiddleware.run(loginUser);
 sagaMiddleware.run(authSaga);
+sagaMiddleware.run(testSaga);
 
 export { store, persistor };
