@@ -4,6 +4,7 @@ import {
   SUBMIT_RESPONSE_SUCCESS,
   SUBMIT_RESPONSE_FAILURE,
   FETCH_QUESTIONS_REQUEST,
+  SUBMIT_RESPONSE_REQUEST,
   INCREMENT_QUESTION_INDEX,
   DECREMENT_QUESTION_INDEX,
   SET_CURRENT_QUESTION_INDEX,
@@ -45,6 +46,14 @@ export const testPageReducer = (state = initialState, action: any) => {
       return {
         ...state,
         isResponseCorrect: true,
+      };
+
+    case SUBMIT_RESPONSE_REQUEST:
+      console.log("@Submit Reducer");
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
       };
     case SUBMIT_RESPONSE_FAILURE:
       return {

@@ -33,8 +33,8 @@ export const fetchQuestionsFailure = (error) => {
   };
 };
 
-export const submitResponseRequest = (response) => {
-  console.log("  action Submit Response action ");
+export const submitResponseRequest = (response: Object) => {
+  console.log("@action Submit Response action ", response);
   return {
     type: SUBMIT_RESPONSE_REQUEST,
     payload: response,

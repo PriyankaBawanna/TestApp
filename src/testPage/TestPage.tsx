@@ -1,21 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchQuestionsRequest } from "@app/testPage/actionTest";
+import {
+  fetchQuestionsRequest,
+  submitResponseRequest,
+} from "@app/testPage/actionTest";
 import RadioButton from "@app/commonComp/RadioButton";
-import Input from "@app/commonComp/Input";
+import { TestName } from "@app/instruction/testName";
+
 const TestPage = () => {
   const dispatch = useDispatch();
+  const [data, setData] = useState({});
+
   const [userResponse, setUserResponse] = useState("");
   const [userResponses, setUserResponses] = useState([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
+  const userDetail = useSelector((state: any) => state.getUserDetailsReducer);
+  const [details, setDetails] = useState(userDetail.user);
+
   const { noOfQuestion } = useSelector(
     (state: any) => state.questionsReducer.questionDetails
   );
-  console.log("No Of Questions ", noOfQuestion);
+
+  const testName = TestName(noOfQuestion);
+
+  const currentTestSession = useSelector(
+    (state: any) => state.instructionReducer.currentTestSession
+  );
 
   const { questions } = useSelector((state: any) => state.testPageReducer);
-  console.log("Response", questions);
-
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const currentQuestion = questions[currentQuestionIndex];
 
   useEffect(() => {
     dispatch(fetchQuestionsRequest(noOfQuestion));
@@ -33,22 +47,30 @@ const TestPage = () => {
     }
   };
 
-  const handleUserResponse = (event) => {
+  const handleUserResponse = (event: any) => {
     const response = event.target.value;
+
+    setUserResponse(response);
+    const userResponseObj = {
+      sessionId: currentTestSession.sessionId,
+      user_id: details._id,
+      QuestionId: currentQuestion._id,
+      testName: testName,
+      userAnswer: userResponse,
+      startTime: currentTestSession.startTime,
+    };
+    dispatch(submitResponseRequest(userResponseObj));
+
+    //maintain Data state current Data and Previous Data
     setUserResponses((prevResponses) => {
       const updatedResponses = [...prevResponses];
       updatedResponses[currentQuestionIndex] = response;
       return updatedResponses;
     });
   };
-  const handleSaveResponse = () => {
-    const response = userResponses[currentQuestionIndex];
-    console.log("After Submission", currentQuestionIndex, response);
-
-    // dispatch(saveUserResponse(currentQuestionIndex, userResponse));
+  const handleGenerateResult = () => {
+    //after  complete test Result will be generated her
   };
-
-  const currentQuestion = questions[currentQuestionIndex];
 
   return (
     <>
@@ -57,6 +79,7 @@ const TestPage = () => {
         {currentQuestion && (
           <div>
             <h3>{currentQuestion.question}</h3>
+
             <ol>
               {currentQuestion.options.map((option, index) => (
                 <li key={index}>
@@ -89,7 +112,7 @@ const TestPage = () => {
             Next
           </button>
           {currentQuestionIndex === questions.length - 1 && (
-            <button onClick={handleSaveResponse}>Submit</button>
+            <button onClick={handleGenerateResult}>Submit</button>
           )}
         </div>
       </div>
