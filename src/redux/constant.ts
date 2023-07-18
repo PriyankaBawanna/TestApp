@@ -9,6 +9,7 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const testSessionURL =
   "http://localhost:8085/sessionForTest/test-sessions";
 export const login = "http://localhost:8085/login/loginUser";
+
 export const getQuestions = `http://localhost:8085/noOfQuestions/questions?numQuestions=`;
 export const saveUserResponseURL = `http://localhost:8085/userResponse/user-response`;
 export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
@@ -40,3 +41,10 @@ export const SET_CURRENT_QUESTION_INDEX = "SET_CURRENT_QUESTION_INDEX";
 
 export const CREATE_TEST_SESSION = "CREATE_TEST_SESSION";
 export const SET_CURRENT_TEST_SESSION = "SET_CURRENT_TEST_SESSION";
+
+export const UPDATE_USER_RESPONSE = "UPDATE_USER_RESPONSE";
+
+//show result
+export const SHOW_RESULT_REQUEST = "SHOW_RESULT_REQUEST";
+export const SHOW_RESULT_SUCCESS = "SHOW_RESULT_SUCCESS";
+export const SHOW_RESULT_FAILURE = "SHOW_RESULT_FAILURE";

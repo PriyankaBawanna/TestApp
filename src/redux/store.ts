@@ -10,6 +10,7 @@ import testSaga from "@app/testPage/testSaga";
 import watchCreateTestSession from "@app/instruction/instructionSaga";
 import testSessionSaga from "@app/testPage/testSaga";
 import submitUserResponse from "@app/testPage/submitResponseSaga";
+import resultSaga from "@app/result/resultSaga";
 const persistConfig = {
   key: "root",
   storage,
@@ -19,6 +20,7 @@ const persistConfig = {
     "questionsReducer",
     "testPageReducer",
     "instructionReducer",
+    "resultSaga",
   ], // Specify the reducer(s) to persist
 };
 
@@ -41,5 +43,6 @@ sagaMiddleware.run(testSaga);
 sagaMiddleware.run(watchCreateTestSession);
 sagaMiddleware.run(testSessionSaga);
 sagaMiddleware.run(submitUserResponse);
+sagaMiddleware.run(resultSaga);
 
 export { store, persistor };

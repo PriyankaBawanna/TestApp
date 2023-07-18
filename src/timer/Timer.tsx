@@ -1,6 +1,9 @@
+import { allRoutes } from "@app/constant/path";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const Timer = () => {
+  const navigate = useNavigate();
   const { time } = useSelector(
     (state: any) => state.questionsReducer.questionDetails
   );
@@ -29,7 +32,7 @@ const Timer = () => {
 
   useEffect(() => {
     if (remainingTime <= 0) {
-      //if timer ends the Navigate to Result Page
+      navigate(allRoutes.result);
     }
   }, [remainingTime]);
 

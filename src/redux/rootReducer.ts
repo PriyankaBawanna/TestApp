@@ -5,6 +5,8 @@ import { getUserDetailsReducer } from "@app/home/homeReducer";
 import { questionsReducer } from "@app/freeTest/reducer";
 import { testPageReducer } from "@app/testPage/reducerTest";
 import { instructionReducer } from "@app/instruction/reducerInstruction";
+import { submitResponseReducer } from "@app/testPage/responseReducer";
+import { resultReducer } from "@app/result/resultReducer";
 export default combineReducers({
   registerNewUser,
   loginUserReducer,
@@ -12,4 +14,6 @@ export default combineReducers({
   questionsReducer,
   testPageReducer,
   instructionReducer,
+  submitResponseReducer,
+  resultReducer,
 });

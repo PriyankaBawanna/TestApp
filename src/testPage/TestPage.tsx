@@ -3,13 +3,19 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   fetchQuestionsRequest,
   submitResponseRequest,
+  updateResponse,
 } from "@app/testPage/actionTest";
 import RadioButton from "@app/commonComp/RadioButton";
 import { TestName } from "@app/instruction/testName";
+import { useNavigate } from "react-router-dom";
+import { allRoutes } from "@app/constant/path";
+import Timer from "@app/timer/Timer";
+import Calculator from "@app/calculator/Calculator";
 
 const TestPage = () => {
   const dispatch = useDispatch();
-  const [data, setData] = useState({});
+  const navigate = useNavigate();
+  const [previousResponseCheck, setPreviousResponseCheck] = useState(false);
 
   const [userResponse, setUserResponse] = useState("");
   const [userResponses, setUserResponses] = useState([]);
@@ -35,6 +41,17 @@ const TestPage = () => {
     dispatch(fetchQuestionsRequest(noOfQuestion));
   }, [dispatch]);
 
+  useEffect(() => {
+    const storedResponses = localStorage.getItem("userResponses");
+    if (storedResponses) {
+      setUserResponses(JSON.parse(storedResponses));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("userResponses", JSON.stringify(userResponses));
+  }, [userResponses]);
+
   const handleNextQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -48,6 +65,7 @@ const TestPage = () => {
   };
 
   const handleUserResponse = (event: any) => {
+    setPreviousResponseCheck(true);
     const response = event.target.value;
 
     setUserResponse(response);
@@ -56,25 +74,35 @@ const TestPage = () => {
       user_id: details._id,
       QuestionId: currentQuestion._id,
       testName: testName,
-      userAnswer: userResponse,
+      userAnswer: response,
       startTime: currentTestSession.startTime,
     };
-    dispatch(submitResponseRequest(userResponseObj));
 
-    //maintain Data state current Data and Previous Data
+    const existingResponse = userResponses[currentQuestionIndex];
+    if (existingResponse) {
+      dispatch(updateResponse(userResponseObj));
+    } else {
+      dispatch(submitResponseRequest(userResponseObj));
+    }
+
+    // Maintain Data state for current Data and Previous Data
     setUserResponses((prevResponses) => {
       const updatedResponses = [...prevResponses];
       updatedResponses[currentQuestionIndex] = response;
       return updatedResponses;
     });
   };
+
   const handleGenerateResult = () => {
-    //after  complete test Result will be generated her
+    alert("Are You want Submit test");
+    navigate(allRoutes.result);
   };
 
   return (
     <>
       Test Page
+      <Timer />
+      <Calculator />
       <div>
         {currentQuestion && (
           <div>
@@ -116,7 +144,9 @@ const TestPage = () => {
           )}
         </div>
       </div>
+      ;
     </>
   );
 };
+
 export default TestPage;

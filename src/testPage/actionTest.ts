@@ -8,6 +8,7 @@ import {
   INCREMENT_QUESTION_INDEX,
   DECREMENT_QUESTION_INDEX,
   SET_CURRENT_QUESTION_INDEX,
+  UPDATE_USER_RESPONSE,
 } from "@app/redux/constant";
 export const fetchQuestionsRequest = (noOfQuestions: number) => {
   console.log(" action Fetch Question Request is called", noOfQuestions);
@@ -34,10 +35,17 @@ export const fetchQuestionsFailure = (error) => {
 };
 
 export const submitResponseRequest = (response: Object) => {
-  console.log("@action Submit Response action ", response);
+  console.log("@action submitResponseRequest   ", response);
   return {
     type: SUBMIT_RESPONSE_REQUEST,
     payload: response,
+  };
+};
+export const updateResponse = (previousResponse: Object) => {
+  console.log("@action updateResponse ", previousResponse);
+  return {
+    type: UPDATE_USER_RESPONSE,
+    payload: previousResponse,
   };
 };
 

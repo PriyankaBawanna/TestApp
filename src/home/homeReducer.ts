@@ -1,8 +1,4 @@
-import {
-  GET_USER_DATA,
-  GET_USER_DATA_SUCCESS,
-  GET_USER_DATA_FAILURE,
-} from "@app/redux/constant";
+import { GET_USER_DATA_SUCCESS } from "@app/redux/constant";
 const initialState = {
   user: null,
   loading: false,

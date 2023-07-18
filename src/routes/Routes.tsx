@@ -1,12 +1,6 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import React, { useState } from "react";
 import Login from "@app/login/Login";
-
 import Register from "@app/register/Register";
 import { allRoutes } from "@app/constant/path";
 import HomePage from "@app/home/HomePage";
@@ -36,4 +30,5 @@ function Home() {
     </Router>
   );
 }
+
 export default Home;

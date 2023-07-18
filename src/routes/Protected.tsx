@@ -1,7 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { LOGIN_SUCCESS } from "@app/redux/constant";
 
 import { Outlet, Navigate } from "react-router-dom";
 import { allRoutes } from "@app/constant/path";
@@ -10,7 +8,6 @@ const ProtectedRoute = () => {
   const isLoggedIn = useSelector(
     (state: any) => state.loginUserReducer.isLoggedIn
   );
-  console.log("@line 12", isLoggedIn);
 
   if (isLoggedIn) {
     return <Outlet />;
