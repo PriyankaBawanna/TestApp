@@ -1,8 +1,8 @@
-import { LOGOUT_USER } from "@app/redux/constant";
+import { LOGIN_FAIL } from "@app/redux/constant";
 
 export const logout = () => {
-  console.log("Logout USer Action ISCalled ");
+  console.log("2.logout actions is called ");
   return {
-    type: LOGOUT_USER,
+    type: LOGIN_FAIL,
   };
 };

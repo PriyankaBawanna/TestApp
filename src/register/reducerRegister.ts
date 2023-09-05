@@ -6,6 +6,7 @@ import {
 
 const initialState = { isLoading: false, isRegister: false };
 export const registerNewUser = (data = initialState, action: any) => {
+  console.log("reducer refister");
   switch (action.type) {
     case REGISTER_NEW_USER:
       return {
@@ -23,6 +24,6 @@ export const registerNewUser = (data = initialState, action: any) => {
         isRegister: false,
       };
     default:
-      return initialState;
+      return data;
   }
 };

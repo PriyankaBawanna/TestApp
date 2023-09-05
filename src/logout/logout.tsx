@@ -11,6 +11,7 @@ const Logout = () => {
 
   const dispatch = useDispatch();
   const handleUserLogout = () => {
+    console.log("1.Logout button is Clicked ");
     dispatch(logout());
     if (!userLoginSession) {
       navigate(allRoutes.login);

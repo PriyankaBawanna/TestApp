@@ -1,4 +1,4 @@
-import { LOGOUT_SUCCESS, LOGOUT_FAILURE } from "@app/redux/constant";
+import { LOGIN_FAIL, LOGOUT_FAILURE } from "@app/redux/constant";
 
 const initialState = {
   isAuthenticated: false,
@@ -8,8 +8,8 @@ const initialState = {
 
 export const authReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case LOGOUT_SUCCESS:
-      console.log("LogOut Reducer ");
+    case LOGIN_FAIL:
+      console.log("Logout User Reducer Is called ");
       return {
         ...state,
         isAuthenticated: false,

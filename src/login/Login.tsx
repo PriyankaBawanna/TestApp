@@ -8,11 +8,12 @@ import { allRoutes } from "@app/constant/path";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const loginResponse = useSelector((state: any) => state.loginUserReducer);
-  console.log("loginResponse", loginResponse.isLoggedIn);
+  const loginResponse = useSelector(
+    (state: any) => state.loginUserReducer.isLoggedIn
+  );
+  //console.log("loginResponse", loginResponse.isLoggedIn);
   useEffect(() => {
-    if (loginResponse.isLoggedIn) {
-      alert("Welcome");
+    if (loginResponse) {
       navigate(allRoutes.home);
     }
   }, [loginResponse]);
@@ -41,17 +42,6 @@ const Login = () => {
       };
       dispatch(loginUser(body));
     }
-
-    // if (loginResponse) {
-    //   alert("welcome");
-    //   console.log("After successfully login data ", loginResponse);
-    //   // navigate("/homePage");
-    //   //return <>Welcome</>;
-    // } else {
-    //   // navigate("/");
-    // }
-
-    // Reset form fields
 
     setEmailOrMobile("");
     setPassword("");

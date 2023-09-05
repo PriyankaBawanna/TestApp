@@ -1,11 +1,12 @@
 import { takeEvery, put } from "redux-saga/effects";
 
-import { LOGOUT_SUCCESS, LOGOUT_USER } from "@app/redux/constant";
+import { LOGIN_FAIL, LOGOUT_USER } from "@app/redux/constant";
 import Cookies from "js-cookie";
 function* logoutSaga() {
+  console.log("Remove token ");
   Cookies.remove("token");
   // Dispatch the logout success action
-  yield put({ type: LOGOUT_SUCCESS });
+  yield put({ type: LOGIN_FAIL });
 }
 
 // Watcher saga
